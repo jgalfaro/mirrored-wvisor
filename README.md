@@ -1,2 +1,3 @@
 # mirrored-wvisor
-mirrored repositores (public releases from our bitbucket repositories)
+
+Automatic tool to derive and detect patterns from malware Command and Control (C&C) server connections. From collective network communications stored on a large-scale malware dataset, WebVisor establishes the underlying patterns among samples of the same malware families. WebVisor focuses on C&C channels based on the Hypertext Transfer Protocol (HTTP). First, it builds clusters based on the structure and statistical features of the HTTP-based Uniform Resource Locators (URLs) stored in the malware dataset. Then, it conducts a fine-grained, noise-agnostic clustering process. Some more information is described [in this paper](https://link.springer.com/chapter/10.1007%2F978-3-319-18467-8_17).
