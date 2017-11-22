@@ -1,0 +1,89 @@
+% fine grained clustering fast
+% take data from 
+% '../data/clusters/coarse_typed/coarse-grain-index-13_typed'
+tic;
+profile on
+input_file = './data/clusters/coarse_typed/coarse-grain-indexes-13_typed';
+disp('getting features');
+fid = fopen(input_file,'r');
+aLine = fgets(fid);
+features = cell(300000,2);
+urls = cell(300000,1);
+counter = 1;
+counter_kv = 0;
+while ischar(aLine)
+    temp = regexp(aLine,'\?','split');
+    if length(temp)==1
+        path = temp{1};
+    end
+    if length(temp)==2
+        path = temp{1};
+        query = temp{2};
+        items = regexp(query,'&','split');
+        kv = cell(length(items),2);
+        counter_kv = counter_kv + length(items);
+        for ii=1:length(items)
+            kv(ii,:) = regexp(items{ii},'=','split'); 
+        end
+        kv_cell = cell(1);
+        kv_cell{1} = kv;
+    end
+    features(counter,:) = [path,kv_cell];
+    urls{counter} = aLine;
+    counter = counter+1;
+    aLine = fgets(fid);
+end
+features = features(1:counter-1,:);
+urls = urls(1:counter-1,:);
+fclose(fid);
+
+% transform key and velue measure in to matrix
+disp('data transformation');
+temp = cell(counter_kv,3);
+counter_temp = 1;
+for ii=1:length(features)
+    aFeature = features{ii,2};
+    for jj=1:length(aFeature(:,1))
+        temp{counter_temp,1} = ii;
+        temp(counter_temp,2:3) = aFeature(jj,:);
+        counter_temp = counter_temp + 1;
+    end
+end
+keyRef = unique(temp(:,2));
+valRef = unique(temp(:,3));
+[ignore,indk] = ismember(temp(:,2),keyRef);
+[ignore,indv] = ismember(temp(:,3),valRef);
+
+% keyMat = zeros(length(features(:,1)),length(keyRef));
+keyMat = full(sparse(cell2mat(temp(:,1)),indk,ones(length(indk),1)));
+valMat = full(sparse(cell2mat(temp(:,1)),indv,ones(length(indv),1)));
+
+disp('starting clustering');
+% [class,type] = dbscan_fast(features, keyMat, valMat, 3, 0.5);
+[class,type] = dbscan_fast_DP(features, keyMat, valMat, 3, 0.5);
+
+disp('putting clusters in files');
+class = class';
+type = type';
+cluster_num = max(class);
+clusters = cell(cluster_num,1);
+clusters{1} = urls(find(class==-1));
+for ii=1:length(clusters)
+    clusters{ii+1} = urls(find(class==ii));
+end
+toc;
+
+% writing clusters to file
+folder_out = './clusters/';
+for ii=1:length(clusters)
+    path_out = strcat(folder_out, num2str(ii-1),'.txt');
+    writeClustersToFile(clusters{ii},path_out);
+end
+profile off
+T = profile('info')
+profshow(T)
+
+% temp
+% 228813*60/3600
+% distance_url_fast(1, features, keyMat, valMat)
+% y tmp/only_paths tmp/only_keys tmp/only_vals tmp/distance_matrix

@@ -1,0 +1,106 @@
+{{#if id}}
+  <div class="container experiment" {{bind-attr id=id}}>
+    <h4>
+      {{#link-to "experiment" id}}
+        Experiment #{{id}}
+      {{/link-to}}
+    </h4>
+    <div class="col-md-4 row">
+      {{view App.ProgressBar isAnimated=true isStriped=true progress=progress}}
+    </div>
+    <div class="col-md-6">
+      <button type="button" class="btn btn-success" {{action "edit" id}}>
+        <span class="glyphicon glyphicon-pencil"></span>
+        Edit
+      </button>
+      {{downloadLink downloadPath}}
+        <button type="button" class="btn btn-primary">
+          <span class="glyphicon glyphicon-cloud-download"></span>
+          Download data
+        </button>
+      </a>
+      {{#if isRemoving}}
+        <button type="button" class="btn btn-danger" {{action "confirmRemoveExperiment"}}>
+          I really want to delete
+        </button>
+        <button type="button" class="btn btn-default" {{action "cancelRemoveExperiment"}}>
+          Cancel
+        </button>
+      {{else}}
+        {{#if finished}}
+          <button type="button" class="btn btn-danger" {{action "removeExperiment"}}>
+            <span class="glyphicon glyphicon-remove-circle"></span>
+            Remove
+          </button>
+        {{else}}
+          <button type="button" class="btn btn-danger" {{action "removeExperiment"}}>
+            <span class="glyphicon glyphicon-remove-circle"></span>
+            Cancel
+          </button>
+        {{/if}}
+      {{/if}}
+    </div>
+    <div class="col-md-2">
+      {{#link-to "experiment.console" id}}
+        Live console output
+      {{/link-to}}
+    </div>
+    <div class="col-md-12">
+      <div class="col-md-6">
+        <ul>
+          <li>Dataset: {{dataset.name}}</li>
+          <li>Started: {{creationDate}}</li>
+          <li>Finished: {{completionDate}}</li>
+          <li>Description:<br>
+            {{nl2br description}}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <ul>
+          <li>
+            Coarse-Grained Clustering
+            <ul>
+              <li>
+                {{coarseGrained-clusteringAlgorithm}}
+                <ul>
+                  <li>k = {{coarseGrained-clusteringAlgorithm-kmeans-k}}</li>
+                  <li>distance: {{coarseGrained-clusteringAlgorithm-kmeans-distance}}</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Fine-Grained Clustering
+            <ul>
+              <li>
+                {{fineGrained-clusteringAlgorithm}}
+                <ul>
+                  <li>eps = {{fineGrained-clusteringAlgorithm-dbscan-eps}}</li>
+                  <li>k = {{fineGrained-clusteringAlgorithm-dbscan-k}}</li>
+                  <li>distance: {{fineGrained-clusteringAlgorithm-dbscan-distance}}</li>
+                </ul>
+              </li>
+              <li>
+                Quality
+                <ul>
+                  <li>Dunn Index: {{fineGrained-quality-dunn}}</li>
+                </ul>
+              </li>
+              <li>
+                Visualization
+                <ul>
+                  <li>Enable: {{fineGrained-visualization-enable}}</li>
+                  <li>Dimensions Reduction Algorithm: {{fineGrained-visualization-dimensionsReduction}}</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Signatures: {{signatures-enable}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{{/if}}

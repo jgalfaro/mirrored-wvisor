@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-4">
+  <ul>
+  {{#each c in fineGrainedClusters}}
+    {{#if c.dunn}}
+      <li>
+        Coarse-grained cluster {{c.clusterId}}
+
+        <ul>
+          <li>Dunn Index: {{c.dunn}}</li>
+          <li>Noise: {{c.noiseUrls}}/{{c.urls}} urls</li>
+        </ul>
+      </li>
+    {{/if}}
+  {{/each}}
+  </ul>
+  </div>
+  <div class="col-md-8">
+    <iframe {{bind-attr src=urlBrowser}} width="800" height="600" id="filebrowserframe">
+      <p>Your browser doesn't support iframes</p>
+    </iframe>
+  </div>
+</div>

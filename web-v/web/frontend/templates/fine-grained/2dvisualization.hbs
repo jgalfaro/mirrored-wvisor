@@ -1,0 +1,21 @@
+<form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="coarsecluster" class="col-sm-3 control-label">Coarse-grained cluster</label>
+    <div class="col-sm-9">
+      {{view Ember.Select 
+        content=clustersAvailable
+        optionLabelPath="content.clusterId"
+        valueBinding="fineGrainedClusters"
+        selection=selectedCluster
+        class="form-control"
+        id="coarsecluster"
+        prompt="Please select a cluster"}}
+    </div>
+  </div>
+</form>
+<div>
+  Information on X axis: <span id="xinfo"></span><br>
+  Information on Y axis: <span id="yinfo"></span>
+</div>
+
+<div id="tooltip2">&nbsp;<br>&nbsp;</div>

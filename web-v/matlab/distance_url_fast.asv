@@ -1,0 +1,31 @@
+function [D]=distance_url_fast(ind, rest, features, keyMat, valMat)
+% Calculates the distances between the i-th url and all url	 
+
+% ind = 1;
+
+% dist1
+Dj = zeros(length(ind),length(rest));
+% Dj = zeros(length(ind),length(rest));
+for ii=1:length(ind)
+    for jj=1:length(rest)
+        Dj(ii,jj) = LCS_fast(features{ind(ii),1},features{rest(jj),1})/...
+            max(length(features{ind(ii),1}),length(features{rest(jj),1}));
+    end
+end
+
+% dist2
+flag_Dk = 0;
+if ~isempty(keyMat)
+    Dk = pdist2(keyMat(ind,:), keyMat(rest,:),  'jaccard');
+    flag_Dk = 1;
+end
+% dist3
+flag_Dk = 0;
+if ~isempty(keyMat)
+    Dv = pdist2(valMat(ind,:), valMat(rest,:), 'jaccard');
+end
+
+D = (Dj+Dk+Dv)/3;
+
+end
+

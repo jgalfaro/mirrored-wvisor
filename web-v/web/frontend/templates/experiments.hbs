@@ -1,0 +1,22 @@
+<div class="page-header">
+  <ul class="nav nav-pills">
+    {{#link-to "experiments.index" tagName="li" activeClass="active"  href=false}}
+      <a {{bindAttr href="view.href"}}>
+        All ({{TotalNum}})
+      </a>
+    {{/link-to}}
+    {{#link-to "experiments.active" tagName="li" activeClass="active"  href=false}}
+      <a {{bindAttr href="view.href"}}>
+        In Progress ({{inprogressNum}})</a></li>
+      </a>
+    {{/link-to}}
+    {{#link-to "experiments.completed" tagName="li" activeClass="active"  href=false}}
+      <a {{bindAttr href="view.href"}}>
+        Completed ({{completedNum}})
+      </a>
+    {{/link-to}}
+  </ul>
+</div>
+<div class="container">
+  {{outlet}}
+</div>

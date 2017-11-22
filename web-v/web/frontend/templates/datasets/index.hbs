@@ -1,0 +1,61 @@
+{{#link-to "datasets.new"}}
+  <button class="btn btn-success">
+    <span class="glyphicon glyphicon-cloud-upload"></span>
+    Upload a new dataset
+  </button>
+{{/link-to}}
+<br><br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>URLs</th>
+      <th>Uploaded on</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each itemController="dataset"}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{countURLs}}</td>
+        <td>{{uploadDate}}</td>
+        <td>
+          <button type="button" class="btn btn-info" {{action "toggleDescriptionDataset"}}>
+            <span class="glyphicon glyphicon-info-sign"></span>
+            Description
+          </button>
+          <button type="button" class="btn btn-success" {{action "edit" id}}>
+            <span class="glyphicon glyphicon glyphicon-pencil"></span>
+            Edit
+          </button>
+          {{downloadLink downloadPath}}
+            <button type="button" class="btn btn-primary">
+              <span class="glyphicon glyphicon-cloud-download"></span>
+              Download
+            </button>
+          </a>
+          {{#if isRemoving}}
+            <button type="button" class="btn btn-danger" {{action "confirmRemoveDataset"}}>
+              I really want to delete
+            </button>
+            <button type="button" class="btn btn-default" {{action "cancelRemoveDataset"}}>
+              Cancel
+            </button>
+          {{else}}
+            <button type="button" class="btn btn-danger" {{action "removeDataset"}}>
+              <span class=" glyphicon glyphicon-remove-circle"></span>
+              Delete
+            </button>
+          {{/if}}
+        </td>
+      </tr>
+      <tr {{bind-attr class=":warning isDescriptionHidden:hide"}}>
+        <td colspan="4">
+          {{nl2br description}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

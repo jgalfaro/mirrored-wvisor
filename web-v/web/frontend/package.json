@@ -1,0 +1,18 @@
+{
+  "name": "malwurl-frontend",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Anthony Verez <netantho@gmail.com>",
+  "description": "Frontend for the malwurl project",
+  "scripts": {
+    "preinstall": "sudo npm install -g grunt-cli"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-ember-templates": "0.4.x",
+    "grunt-ember-handlebars": "~0.7.0",
+    "grunt-contrib-watch": "~0.5.3"
+  }
+}

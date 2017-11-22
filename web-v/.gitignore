@@ -1,0 +1,13 @@
+*.un~
+.project
+.pydevproject
+*.pyc
+data/output.all.with.md5
+data/output.with.TSP.new
+*.log
+data/clusters/coarse-grain-indexes-*_typed_nodups_*
+extracted_data100k
+*.tsv
+web/malwurl-server/node_modules
+web/malwurl-server/public/data/malwurl.sqlite3*
+web/frontend/node_modules/

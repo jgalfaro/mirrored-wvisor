@@ -1,0 +1,138 @@
+<div class="page-header">
+    <h2>New experiment</h2>
+</div>
+
+<form class="form-horizontal" role="form" id="newExperimentForm">
+  {{#if datasetEmpty}}
+    <div class="alert alert-danger">You need to choose a dataset!</div>
+  {{/if}}
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Dataset</label>
+    <div class="col-sm-10">
+      {{view Ember.Select 
+        content=datasets
+        optionLabelPath="content.name"
+        valueBinding="dataset"
+        class="form-control"
+        prompt="Please select a dataset"}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      {{textarea class="form-control" rows="3" name="description" id="description" value=description}}
+    </div>
+  </div>
+  <fieldset>
+    <legend>Coarse-grained clustering</legend>
+    <div class="form-group">
+      <label for="coarseGrained-clusteringAlgorithm" class="col-sm-2 control-label">Clustering Algorithm</label>
+      <div class="col-sm-10">
+        <!-- <select id="coarseGrained-clusteringAlgorithm" name="coarseGrained-clusteringAlgorithm" class="form-control"> -->
+          <!-- <option value="kmeans">Kmeans</option> -->
+        <!-- </select> -->
+      {{view Ember.Select 
+        content=coarseGrainedClusteringAlgorithm
+        valueBinding="coarseGrained-clusteringAlgorithm"
+        class="form-control"}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="coarseGrained-clusteringAlgorithm-kmeans-k" class="col-sm-2 control-label">k</label>
+      <div class="col-sm-10">
+        {{view App.NumberField name="coarseGrained-clusteringAlgorithm-kmeans-k" id="coarseGrained-clusteringAlgorithm-kmeans-k" class="form-control" value=coarseGrained-clusteringAlgorithm-kmeans-k required=""}}
+        <!-- <input name="coarseGrained-clusteringAlgorithm-kmeans-k" id="coarseGrained-clusteringAlgorithm-kmeans-k" class="form-control" type="number" value="3" required> -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="coarseGrained-clusteringAlgorithm-kmeans-distance" class="col-sm-2 control-label">Distance Function</label>
+      <div class="col-sm-10">
+        {{view Ember.Select 
+        content=coarseGrainedClusteringAlgorithmKmeansDistance
+        valueBinding="coarseGrained-clusteringAlgorithm-kmeans-distance"
+        class="form-control"}}
+        <!-- <select id="coarseGrained-clusteringAlgorithm-kmeans-distance" name="coarseGrained-clusteringAlgorithm-kmeans-distance" class="form-control">
+          <option value="lettersFrequency">Letters Frequency</option>
+        </select> -->
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Fine-grained clustering</legend>
+    <div class="form-group">
+      <label for="fineGrained-clusteringAlgorithm" class="col-sm-2 control-label">Clustering Algorithm</label>
+      <div class="col-sm-10">
+      {{view Ember.Select 
+        content=fineGrainedClusteringAlgorithm
+        valueBinding="fineGrained-clusteringAlgorithm"
+        class="form-control"}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fineGrained-clusteringAlgorithm-dbscan-eps" class="col-sm-2 control-label">eps</label>
+      <div class="col-sm-10">
+        {{view App.NumberField name="fineGrained-clusteringAlgorithm-dbscan-eps" id="fineGrained-clusteringAlgorithm-dbscan-eps" class="form-control" value=fineGrained-clusteringAlgorithm-dbscan-eps required=""}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fineGrained-clusteringAlgorithm-dbscan-k" class="col-sm-2 control-label">k</label>
+      <div class="col-sm-10">
+        {{view App.NumberField name="fineGrained-clusteringAlgorithm-dbscan-k" id="fineGrained-clusteringAlgorithm-dbscan-k" class="form-control" value=fineGrained-clusteringAlgorithm-dbscan-k required=""}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fineGrained-clusteringAlgorithm-dbscan-distance" class="col-sm-2 control-label">Distance Function</label>
+      <div class="col-sm-10">
+        {{view Ember.Select 
+        content=fineGrainedClusteringAlgorithmDbscanDistance
+        valueBinding="fineGrained-clusteringAlgorithm-dbscan-distance"
+        class="form-control"}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fineGrained-quality-dunn" class="col-sm-2 control-label">Quality: Dunn index</label>
+      <div class="col-sm-10">
+        <label class="checkbox-inline">
+          {{input type="checkbox" name="fineGrained-quality-dunn" id="fineGrained-quality-dunn" checked=fineGrained-quality-dunn}}
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fineGrained-visualization-enable" class="col-sm-2 control-label">Visualization: Enable</label>
+      <div class="col-sm-10">
+        <label class="checkbox-inline">
+          {{input type="checkbox" name="fineGrained-visualization-enable" id="fineGrained-visualization-enable" checked=fineGrained-visualization-enable}}
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fineGrained-visualization-dimensionsReduction" class="col-sm-2 control-label">Visualization: Dimensions Reduction Algorithm</label>
+      <div class="col-sm-10">
+        {{view Ember.Select 
+        content=fineGrainedVisualizationDimensionsReduction
+        valueBinding="fineGrained-visualization-dimensionsReduction"
+        class="form-control"}}
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Signatures</legend>
+    <div class="form-group">
+      <label for="signatures-enable" class="col-sm-2 control-label">Enable</label>
+      <div class="col-sm-10">
+        <label class="checkbox-inline">
+          {{input type="checkbox" name="signatures-enable" id="signatures-enable" checked=signatures-enable}}
+        </label>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="submit" class="btn btn-success" {{action "save"}}>
+        Submit
+      </button>
+    </div>
+  </div>
+</form>

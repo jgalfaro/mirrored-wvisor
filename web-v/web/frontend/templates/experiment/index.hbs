@@ -1,0 +1,59 @@
+<div class="col-md-2">
+  <ul class="nav nav-pills nav-stacked">
+    {{#link-to "experiment.index" id tagName="li" activeClass="active"  href=false}}
+      <a {{bindAttr href="view.href"}}>
+        Overview
+      </a>
+    {{/link-to}}
+        {{#link-to "experiment.filebrowser" id tagName="li" activeClass="active"  href=false}}
+      <a {{bindAttr href="view.href"}}>
+        File Browser
+      </a>
+    {{/link-to}}
+    {{#link-to "experiment.console" id tagName="li" activeClass="active"  href=false}}
+      <a {{bindAttr href="view.href"}}>
+        Console
+      </a>
+    {{/link-to}}
+    {{#if fineGrainedFeatures}}
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          Fine-Grained Clustering <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          {{#if fineGrained-visualization-enable}}
+            {{#link-to "fine-grained.2dvisualization" id tagName="li" activeClass="active"  href=false}}
+              <a {{bindAttr href="view.href"}}>
+                2D Visualization
+              </a>
+            {{/link-to}}
+            {{#link-to "fine-grained.3dvisualization" id tagName="li" activeClass="active"  href=false}}
+              <a {{bindAttr href="view.href"}}>
+                3D Visualization
+              </a>
+            {{/link-to}}
+          {{/if}}
+          {{#if fineGrained-quality-dunn}}
+            {{#link-to "fine-grained.quality" id tagName="li" activeClass="active"  href=false}}
+              <a {{bindAttr href="view.href"}}>
+                Quality
+              </a>
+            {{/link-to}}
+          {{/if}}
+        </ul>
+      </li>
+    {{/if}}
+    {{#if signatures-enable}}
+      {{#link-to "experiment.signatures" id tagName="li" activeClass="active"  href=false}}
+        <a {{bindAttr href="view.href"}}>
+          Signatures
+        </a>
+      {{/link-to}}
+    {{/if}}
+  </ul>
+</div>
+<div class="col-md-10">
+  {{outlet}}
+
+  {{partial "experimentItem"}}
+</div>

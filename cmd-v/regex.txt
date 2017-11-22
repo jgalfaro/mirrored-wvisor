@@ -1,0 +1,160 @@
+MD5
+~~~
+
+Regex: (\b[A-Fa-f0-9]{32}\b)
+
+
+Number of total values: 2728544
+Number of matches: 31668
+Number of equal value-regex matches: 29473
+Number of non-equal value-regex matches: 2195
+
+
+Samples:
+
+URL redirections containing MD5 (not weird)
+
+uaid_1.9ab10b48e17411e0bbd7e5477bfd071c.5133
+
+6de9f8e975514ba7b12f15d9f2613c91$$
+
+3aa4d0340f7bf9d95468117cb52de7a7-MTIzMDg1MDM5NAk4Ny4xMTguMTA0LjIwMwkJcF9yczAxCTgwNTAJZnJlZXNleCUyMwllc3BvdHRpbmcJaHR0cDovL2FmZmlsaWF0ZS5ERS5lc3BvdHRpbmcuY29tL3NlYXJjaC9yZWRpcmVjdG9yLmFzcD91cmw9aHR0cCUzYSUyZiUyZnRyYWNrLnNlYXJjaGlnbml0ZS5jb20lMmZzaSUyZmNtJTJmdHJhY2tpbmclMmZjbGlja3JlZGlyZWN0LmFzcHglM2ZzaXRyYWNraW5naWQlM2Q1MDc0ODU0MSZiaWRpZD01NDU0NTE0MTcmc2VhcmNoZ3VpZD0lRkUlRDclOUIlODYlQjglQzklRUElODglQTYlREYlQkMlRUIlOUMlRjclRjQlODAlRUMlRjAlQjklREMlRUQlQTglQjclQjAlOUUlQjQlRDAlQ0YlQjclODMlOTElQjYlRTglQTElQ0UlQ0ImZG9tYWluPURFJmFmZmlsaWF0ZWlkPTEmcG9zaXRpb249MSZxdWVyeT1mcmVlK3NleCZzZWFyY2hkYXRlPTAxK0phbisyMDA5KzIyJTNhMDklM2E1MyUzYTA4JmVkaD1zT1hETUZKREppdFJ1NFVQWmVCY29pRjZMeTQlM2QmZWQ9ZGoweEptMTBQVEUlM2QJMC4wNzcJMAkxCTg3NDk2XzMwMzY1OTgJCTEJR2VybWFueQlERQ==
+
+0ff86c777b069fd8fc9b2fad3e0aa507:0038
+
+1306441323-d660ae14922fdd4718fc27a0a038e1ed
+
+c021f53f60dd0fcc0000525400123456-4f824b1bf600457fb3cd1a6b153d32be-LA_1-ezLife-13923-1.8.7.3-13923
+
+1002|102|*|60|468|1230283794|1435238675|UTF-8|1|0|0|0|e8b0c25eebe6fb4890b65b783a6e1715
+
+8(3!tduid*url)9(3!3cbb89b3f3f5f68020d5a946f7d52c03*?t&CHM/LLL.H&SMC=affi-ldm-list-adsite-under)
+
+D77DAEF3A88047FEBF14D4CA6E85C6AA-118-redux-B
+
+
+URL redirection
+~~~~~~~~~~~~~~~
+
+Regex: "(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|localhost|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$"
+
+
+Number of total values: 2728544
+Number of matches: 66002
+Number of equal value-regex matches: 60774
+Number of non-equal value-regex matches: 5228
+
+
+Samples of the 60775 values that *are* a URL:
+
+Using $ instead of &:
+http://mfp1.adnetwork.com.br/mfp/adnetwork/maestro/rm/$d=602$u=3957550480725039924$t=1$s=6$b=64272$cr=14051$f=14852$c=0$n=323201820$ct=
+http://mfp.r7.predicta.net/mfp/video/ad/$d=490$p=40$s=1$n=659421824$k1=c_179
+
+
+Samples of 5228 values that contain a URL:
+
+Port number first(?): 5002http://www.niudoudou.com/web/reg/fld_630.asp
+
+XSS xploitation(?): \"text/javascript\"></script></head><frameset rows=\"100%,*\" frameborder=\"no\" border=\"0\" framespacing=\"0\">  <!-- SCC a5 -->  <frame src=\"http://ndparking.com/serve.php?lid=524813
+
+Really a redirection?: 75248424-1290854845-http://www.google.fr/
+
+Inception: http://direkizle.net/web111.php?git=http://cfs-ak-snc1.fbcdn.net/80033/963/109918469082399_3323.mp4
+
+A space at the beggining:  http://facebook.com/blog.fc2
+
+Commas at the beggining: ,,http://thevehic.com/2wave.php?yfe6r8fpbg1yhglulxtwqvy4trpsmzv0yn/d,$
+
+Dollars at the beggining: $$http://g.msn.com/_2AD0000L/63000000000017184.1?http://ads1.msn.com/ads/abuimg/clear.gif
+
+
+SHA1
+~~~~
+
+Regex: "(\b[A-Fa-f0-9]{40}\b)"
+
+
+Number of total values: 2728544
+Number of matches: 13583
+Number of equal value-regex matches: 12913
+Number of non-equal value-regex matches: 670
+
+
+Samples:
+
+Within URL redirections.
+
+Next to Base64 values (encoded URL redirections most of the times):
+4aed0ca550648970752153084348d34104f5ca04-aXA9NjYuMjMwLjIzMC4yMzAmY3B2X3JhdGU9MC4wMDIwMDAmc3JwbmFtZT1jbGlj
+a3NvcmNwdiZ0aW1lc3RhbXA9MTIzNjMyNjIwMiZwb3B1cD1odHRwJTNBJTJGJTJG
+YWRzLmNsaWNrc29yLmNvbSUyRmdvLnBocCUzRm5pZCUzRDElMjZjcHglM0RjcHYl
+MjZ1aWQlM0QzMTU1MDA1MDUxJTI2cGlkJTNEOTMwMzMlMjZzaWQlM0QxMzY4Mjgl
+MjZrdyUzRGxpdmUlMkJuYmElMkJvZGRzJTI2Y3VybCUzRGh0dHAlMjUzQSUyNTJG
+JTI1MkZmZi5jb25uZXh0cmEuY29tJTI1MkZzcG9ydGluZ2JldFVTQSUyNTJGc2Vs
+ZWN0b3IlMjUyRmNsaWNrJTI1M0ZjbGllbnQlMjUzRHNwb3J0aW5nYmV0VVNBJTI1
+MjZwbGFjZW1lbnQlMjUzRENsaWNrc29yX05CQV90ZXh0bGluaw==
+
+1~ed097b82db382a1fd455fb947bcd01b57e206e42
+
+8b02e6f72d75e2f1a8f8f95f6ffb6148e597cf99-sfu.4S.uu.Fk   f.fwffff        7cKqLvIaL       wsS4F3Fk3s      pTc
+
+8ca698da283db163e33077911b6ca93c66984e47-qR=w4F.4U.wSF.wU4&ERY=f.ffsfff&NaR=oqaIEvERYERY&vqQINvjQR=wsk3wSwwuf&RtR=2vvR%Fh%s6%s6nnn.oqaIEvaoa.EtQ%s6YvajEH.R2R%F6Rqo%F9wsF%sUEqo%F9f%sUEaqo%F9f%sUv%F9f%suf%s3%sUEE%F9ukf%sUNjqo%F9wUk-kSfks%sURjajQN%F9UuoSs3Sw3fAkAAUFS34w3oIsO3foFASSESEE3EfI-Me%sSF9nk6.kG.nr6.nGk%sSsUpeJ%sSF9O.OOHOOO%sSsUDje%sSF91tvVNtMjgpYpeJ%sSsUYMZgDY1Ze%sSF9nNHFnrnnkW%sSsUeve%sSF9sYYe%sSsS62%sSsSNU%sSsSNUCjq.CjYhB.pvZ%sSsSNUpeJ.wDe%sSsS6Ue%sSsS63nn6N6N%sSsSNGe1jYVgjQMV%sSsS63O.OOn%sSsSNGjvVQMV%sSsS63O.OOn%sSsSNGCjq%sSsS63LLL.jgXMDYjfDZ1jY.pvZ%sSsSNGMe%sSsS63nk6.kG.nr6.nGk%sSsSNG1Mt%sSsS63nN6%sSsSNGDgqgpYgtogfLvjt%sSsS63jgXMDYjfDZ1jY.pvZ%sSsSNGDgqgpYgtKMDYMVXzt%sSsS63kHnNk6k%sUYWai%F9nnn.aIzqNva0NQjav.EtQ
+
+
+Base64
+~~~~~~
+
+4 options -+- Anchored URL-safe regex: "^(?:[A-Za-z0-9\-_]{4}){2,}(?:[A-Za-z0-9\-_]{2}[AEIMQUYcgkosw048]=|[A-Za-z0-9\-_][AQgw]==)$"
+	   |
+	   +- Unanchored URL-safe regex: "(?:[A-Za-z0-9\-_]{4}){2,}(?:[A-Za-z0-9\-_]{2}[AEIMQUYcgkosw048]=|[A-Za-z0-9\-_][AQgw]==)"
+	   |
+	   +- Anchored regex: "^(?:[A-Za-z0-9+/]{4}){2,}(?:[A-Za-z0-9+/]{2}[AEIMQUYcgkosw048]=|[A-Za-z0-9+/][AQgw]==)$"
+	   |
+	   +- Unanchored regex: "(?:[A-Za-z0-9+/]{4}){2,}(?:[A-Za-z0-9+/]{2}[AEIMQUYcgkosw048]=|[A-Za-z0-9+/][AQgw]==)"
+
+Strategy:
+
+	1.- Run anchored URL-safe regex
+	2.- Run anchored regex
+	3.- Run unanchored URL-safe regex
+	4.- Run unanchored regex
+
+
+Integer
+~~~~~~~
+
+Regex: "^\d+$"
+
+Number of total values: 2728544
+Number of matches: 1275987
+Number of equal value-regex matches: 1275987
+Number of non-equal value-regex matches: 0
+
+
+Float
+~~~~~
+
+Regex (strictly float, with decimal dot): "^[-+]?[0-9]*\.[0-9]+([eE][-+]?[0-9]+)?$"
+
+Number of total values: 2728544
+Number of matches: 54540
+Number of equal value-regex matches: 54540
+Number of non-equal value-regex matches: 0
+
+
+New Value type
+~~~~~~~~~~~~~~
+
+Path: /modules/news/upload/4f369441abd8a269150eebaf9c41c6ad.jpg
+
+
+Order for applying the regex
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	1.- URL redirection
+	2.- MD5
+	3.- SHA1
+	4.- Base64
+	5.- Integer
+	6.- float

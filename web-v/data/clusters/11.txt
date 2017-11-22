@@ -1,0 +1,4 @@
+/Agent/SeerIE1.0.9.79.exe
+/OemWpsSetup80.exe
+/setup1008.ocx
+/Setup1.0.3.0.exe

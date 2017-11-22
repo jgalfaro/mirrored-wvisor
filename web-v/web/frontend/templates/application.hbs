@@ -1,0 +1,38 @@
+<div class="navbar navbar-inverse" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Malwurl</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          {{link-to "In Progress" "index" activeClass="active"}}
+        </li>
+        <li>
+          {{link-to "New experiment" "new_experiment" activeClass="active"}}
+        </li>
+        <li>
+          {{link-to "Datasets" "datasets.index" activeClass="active"}}
+        </li>
+        <li>
+          {{link-to "Experiments" "experiments" activeClass="active"}}
+        </li>
+        <li>
+          {{link-to "Settings" "settings" activeClass="active"}}
+        </li>
+        <li>
+          {{link-to "About" "about" activeClass="active"}}
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+<div class="container">
+  {{outlet}}
+</div>

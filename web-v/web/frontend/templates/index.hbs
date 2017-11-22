@@ -1,0 +1,83 @@
+<div class="container" id="system_monitoring">
+  <div class="page-header">
+      <h2>System Monitoring</h2>
+  </div>
+  <!-- <div class="row controls">
+      <div class="col-md-2">
+          <a id="start" class="btn btn-success disabled" href="#">
+            <i class="icon-play icon-white"></i> Start
+          </a>
+          <a id="stop" class="btn btn-danger disabled" href="#">
+            <i class="icon-stop icon-white"></i> Stop
+          </a>
+      </div>
+      <div class="col-md-4">
+        <div id='messages' class="span10"></div>
+      </div>
+  </div> -->
+  <br>
+  <div class="row">
+      <div id="sysinfo" class="col-md-7">
+        <span id="hostname"></span> 
+        <span id="type"></span> 
+        <span id="arch"></span> 
+        <span id="release"></span>
+      </div>
+      <div id="uptime" class="col-md-5">
+        Uptime: <span class="value">0</span>
+      </div>
+  </div>
+  <br>
+  <div class="row">
+    <div id="cpus" class="col-md-7">CPU:
+      <span class="count">0</span> x <span class="model">0</span>
+    </div>
+    <div id="loadavg" class="col-md-5">
+      Load Avg: <span class="p1">0</span> (1 min),
+      <span class="p5">0</span> (5 min),
+      <span class="p15">0</span> (15 min)
+    </div>
+  </div>
+  <br>
+  <div class="row col-md-12">
+    <div class="col-md-1"></div>
+    <div id="mem" class="row col-md-3">
+      System Memory: 
+      <span class="perUsed">0</span>% 
+      (<span class="used">0</span> MB / 
+      <span class="total">0</span> MB)
+      <div class="progress">
+        <div class="progress-bar progress-bar-info" style="width: 0%"></div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div id="swap" class="row col-md-3">
+      System Swap: 
+      <span class="perUsed">0</span>% 
+      (<span class="used">0</span> MB / 
+      <span class="total">0</span> MB)
+      <div class="progress">
+        <div class="progress-bar progress-bar-info" style="width: 0%"></div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div id="node-mem" class="row col-md-3">
+      Node Process Heap:
+      <span class="perUsed">0</span>%
+      (<span class="used">0</span> MB / 
+      <span class="total">0</span> MB)
+      <div class="progress">
+        <div class="progress-bar progress-bar-info" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.container#system_monitoring -->
+
+<div class="container">
+  <div class="page-header">
+      <h2>Ongoing Tasks ({{inprogressNum}})</h2>
+  </div>
+  {{#each itemController="experiment"}}
+    {{partial "experimentItem"}}
+  {{/each}}
+</div>

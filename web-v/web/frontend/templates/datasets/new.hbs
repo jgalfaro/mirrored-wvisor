@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h2>Upload a new dataset</h2>
+</div>
+
+<form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="file" class="col-sm-2 control-label">File</label>
+    <div class="col-sm-10">
+      {{input type="file" name="file" id="file" disabled=isUploading}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      {{input type="text" class="form-control" name="name" id="name" placeholder="Name" disabled=isUploading}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      {{textarea class="form-control" name="description" id="description" placeholder="Description" disabled=isUploading}}
+    </div>
+  </div>
+  {{#if isUploading}}
+    <div class="progress progress-striped active">
+      <div id="fileprogress" class="progress-bar"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+      </div>
+    </div>
+  {{/if}}
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      {{#unless isUploading}}
+        <button id="submit" class="btn btn-success"  {{action "sendFile"}}>
+          Send
+        </button>
+        <input type="reset" value="Reset" class="btn btn-default">
+      {{/unless}}
+      <br><br>
+      {{#link-to "datasets"}}
+        <button type="button" class="btn btn-default">
+          <span class="glyphicon glyphicon-circle-arrow-left"></span>
+          Go back
+        </button>
+      {{/link-to}}
+    </div>
+  </div>
+</form>

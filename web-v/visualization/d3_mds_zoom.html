@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- Based on http://bl.ocks.org/mbostock/3887118 -->
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+rect {
+  fill: #fff;
+}
+</style>
+<body>
+<script src="d3.v3.min.js"></script>
+<script>
+var tooltip = d3.select("body")
+.append("div")
+.style("position", "absolute")
+.style("z-index", "10")
+.style("margin-left", "200px")
+.style("visibility", "hidden")
+.text('')
+
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 1200 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom));
+
+var rect = svg.append("rect")
+  .attr("class", "overlay")
+  .attr("width", width)
+  .attr("height", height);
+
+function zoom() {
+  svg.selectAll("circle").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  //console.log(d3.event.scale)
+  svg.selectAll("circle").attr("r", 5/d3.event.scale)
+}
+
+render('mds2d_5k_100.tsv');
+
+
+function update_tooltip(tooltip, text) {
+     d3.select("div").html(text)
+}
+
+function render(file) {
+  var x = d3.scale.linear()
+    .domain([-0.5, 0.5])
+    .range([0, width]);
+
+  var y = d3.scale.linear()
+      .domain([0.5, -0.5])
+      .range([0, height]);
+
+  var color = d3.scale.category10();
+
+  d3.tsv(file, function(error, data) {
+
+    d3.select("body").transition();
+
+    svg.selectAll("circle").remove();
+
+    svg.selectAll("circle")
+        .data(data)
+      .enter().append("circle")
+        .attr("r", 5)
+        .attr("cx", function(d) { return x(d.x); })
+        .attr("cy", function(d) { return y(d.y); })
+        .attr("transform", function(d) { return "translate(" + d.x + ","+d.y+");"; })
+        .style("fill", function(d) { return color(d.cluster); })
+        .on("mouseover", function(d){ update_tooltip(tooltip, d.cluster+'<br>'+d.url); return tooltip.style("visibility", "visible");})
+        .on("mouseout", function(){ update_tooltip(tooltip, ''); return tooltip.style("visibility", "hidden");});
+
+  });
+  d3.select("span.title").html(file);
+}
+</script>
+<h2><span class="title">mds2d_5k_100.tsv</span></h2>
+<select onchange="render(options[this.selectedIndex].value)">
+  <option value="mds2d_5k_20.tsv">mds2d_5k_20.tsv</option>
+  <option value="mds2d_5k_40.tsv">mds2d_5k_40.tsv</option>
+  <option value="mds2d_5k_60.tsv">mds2d_5k_60.tsv</option>
+  <option value="mds2d_5k_80.tsv">mds2d_5k_80.tsv</option>
+  <option value="mds2d_5k_100.tsv" selected="true">mds2d_5k_100.tsv</option>
+  <option value="mds2d_5k_300.tsv">mds2d_5k_300.tsv</option>
+  <option value="mds2d_5k_500.tsv">mds2d_5k_500.tsv</option>
+  <option value="mds2d_5k_1000.tsv">mds2d_5k_1000.tsv</option>
+  <option value="mds2d_5k_2000.tsv">mds2d_5k_2000.tsv</option>
+  <option value="mds2d_5k_3000.tsv">mds2d_5k_3000.tsv</option>
+  <option value="mds2d_5k_5000.tsv">mds2d_5k_5000.tsv</option>
+  <option value="mds2d_5k_10000.tsv">mds2d_5k_10000.tsv</option>
+  <option value="mds2d_1000.tsv">mds2d_1000.tsv</option>
+  <option value="mds2d_custom.tsv">mds2d_custom.tsv (scikit, 5k)</options>
+  <option value="pca2d.tsv">pca2d.tsv (scikit, 5k)</options>
+  <option value="isomap2d.tsv">isomap2d.tsv (scikit, 5k)</option>
+  <option value="lles2d.tsv">lles2d.tsv (scikit, 5k)</option>
+  <option value="100k-1-pca2d.tsv">data-100k-1/pca2d.tsv (scikit)</option>
+  <option value="coarse-grain-indexes-0_typed_nodups_mds2d.tsv">coarse mds2d 0</option>
+  <option value="coarse-grain-indexes-1_typed_nodups_mds2d.tsv">coarse mds2d 1</option>
+  <option value="coarse-grain-indexes-2_typed_nodups_mds2d.tsv">coarse mds2d 2</option>
+  <option value="coarse-grain-indexes-3_typed_nodups_mds2d.tsv">coarse mds2d 3</option>
+  <option value="coarse-grain-indexes-4_typed_nodups_mds2d.tsv">coarse mds2d 4</option>
+  <option value="coarse-grain-indexes-5_typed_nodups_mds2d.tsv">coarse mds2d 5</option>
+  <option value="coarse-grain-indexes-6_typed_nodups_mds2d.tsv">coarse mds2d 6</option>
+  <option value="coarse-grain-indexes-7_typed_nodups_mds2d.tsv">coarse mds2d 7</option>
+  <option value="coarse-grain-indexes-8_typed_nodups_mds2d.tsv">coarse mds2d 8</option>
+  <option value="coarse-grain-indexes-9_typed_nodups_mds2d.tsv">coarse mds2d 9</option>
+  <option value="coarse-grain-indexes-10_typed_nodups_mds2d.tsv">coarse mds2d 10</option>
+  <option value="coarse-grain-indexes-11_typed_nodups_mds2d.tsv">coarse mds2d 11</option>
+  <option value="coarse-grain-indexes-12_typed_nodups_mds2d.tsv">coarse mds2d 12</option>
+  <option value="coarse-grain-indexes-13_typed_nodups_mds2d.tsv">coarse mds2d 13</option>
+  <option value="coarse-grain-indexes-14_typed_nodups_mds2d.tsv">coarse mds2d 14</option>
+  <option value="coarse-grain-indexes-15_typed_nodups_mds2d.tsv">coarse mds2d 15</option>
+  <option value="coarse-grain-indexes-16_typed_nodups_mds2d.tsv">coarse mds2d 16</option>
+  <option value="coarse-grain-indexes-17_typed_nodups_mds2d.tsv">coarse mds2d 17</option>
+  <option value="coarse-grain-indexes-18_typed_nodups_mds2d.tsv">coarse mds2d 18</option>
+  <option value="coarse-grain-indexes-19_typed_nodups_mds2d.tsv">coarse mds2d 19</option>
+  <option value="coarse-grain-indexes-20_typed_nodups_mds2d.tsv">coarse mds2d 20</option>
+  <option value="coarse-grain-indexes-21_typed_nodups_mds2d.tsv">coarse mds2d 21</option>
+  <option value="coarse-grain-indexes-22_typed_nodups_mds2d.tsv">coarse mds2d 22</option>
+  <option value="coarse-grain-indexes-23_typed_nodups_mds2d.tsv">coarse mds2d 23</option>
+  <option value="coarse-grain-indexes-24_typed_nodups_mds2d.tsv">coarse mds2d 24</option>
+  <option value="coarse-grain-indexes-25_typed_nodups_mds2d.tsv">coarse mds2d 25</option>
+  <option value="coarse-grain-indexes-26_typed_nodups_mds2d.tsv">coarse mds2d 26</option>
+  <option value="coarse-grain-indexes-27_typed_nodups_mds2d.tsv">coarse mds2d 27</option>
+  <option value="coarse-grain-indexes-28_typed_nodups_mds2d.tsv">coarse mds2d 28</option>
+</select>
+</body>

@@ -1,0 +1,218 @@
+/*
+ * Dynamically generates the new experiment form based
+ * on the config object below
+ *
+ * :type
+ * [] -> dropdown choice
+ * :bool -> checkbox
+ * inside options: facultative options
+ */
+
+var experimentSettingsWidgets = {
+  coarseGrainedClustering: {
+    clusteringAlgorithm: [
+      {
+        Kmeans: {
+          k: ":integer",
+          distance: ["lettersFrequency"]
+        }
+      }
+    ],
+    typingBeforeClustering: {
+      parseValues: ":bool",
+      filters: {
+        url: ":bool",
+        md5: ":bool",
+        sha1: ":bool",
+        base64: ":bool",
+        integer: ":bool",
+        float: ":bool",
+        boolean: ":bool",
+        resolution: ":bool",
+        hexEncoded: ":bool",
+        macAddress: ":bool",
+        filePath: ":bool",
+        timestamp: ":bool",
+        countryCode: ":bool",
+        noType: ":bool"
+      }
+    },
+    typingAfterClustering: {
+      parseValues: ":bool",
+      filters: {
+        url: ":bool",
+        md5: ":bool",
+        sha1: ":bool",
+        base64: ":bool",
+        integer: ":bool",
+        float: ":bool",
+        boolean: ":bool",
+        resolution: ":bool",
+        hexEncoded: ":bool",
+        macAddress: ":bool",
+        filePath: ":bool",
+        timestamp: ":bool",
+        countryCode: ":bool",
+        noType: ":bool"
+      }
+    }
+  },
+  fineGrainedClustering: {
+    clusteringAlgorithm: [
+      {
+        DBScan: {
+          eps: ":float",
+          k: ":integer",
+          distance: ["v1-KeyMat", "v2-KeyMatByVal"]
+        }
+      }
+    ],
+    typingBeforeClustering: {
+      parseValues: ":bool",
+      filters: {
+        url: ":bool",
+        md5: ":bool",
+        sha1: ":bool",
+        base64: ":bool",
+        integer: ":bool",
+        float: ":bool",
+        boolean: ":bool",
+        resolution: ":bool",
+        hexEncoded: ":bool",
+        macAddress: ":bool",
+        filePath: ":bool",
+        timestamp: ":bool",
+        countryCode: ":bool",
+        noType: ":bool"
+      }
+    },
+    typingAfterClustering: {
+      parseValues: ":bool",
+      filters: {
+        url: ":bool",
+        md5: ":bool",
+        sha1: ":bool",
+        base64: ":bool",
+        integer: ":bool",
+        float: ":bool",
+        boolean: ":bool",
+        resolution: ":bool",
+        hexEncoded: ":bool",
+        macAddress: ":bool",
+        filePath: ":bool",
+        timestamp: ":bool",
+        countryCode: ":bool",
+        noType: ":bool"
+      }
+    },
+    quality: {
+      dunn: ":bool"
+    },
+    visualization: {
+      dimensionsReductionAlgorithm: ["mds"]
+    }
+  },
+  signatures: {
+    enable: ":bool"
+  }
+}
+
+function ExperimentFormGenerator(settings) {
+  this.settings = settings;
+  this.html = "";
+}
+
+ExperimentFormGenerator.prototype.humanize = function(text) {
+  return text
+    // insert a space before all caps
+    .replace(/([A-Z])/g, ' $1')
+    // uppercase the first character
+    .replace(/^./, function(str){ return str.toUpperCase(); });
+}
+
+ExperimentFormGenerator.prototype.generateFieldset = function(name) {
+  this.html += "<fieldset> \
+    <legend> \
+      "+this.humanize(name)+" \
+    </legend> \
+  <fieldset>";
+}
+
+ExperimentFormGenerator.prototype.generateLabel = function(name) {
+  this.html += "<div class='form-group'> \
+    <label for='"+name+"' class='col-sm-2 control-label'> \
+      "+this.humanize(name)+" \
+    </label>";
+}
+
+ExperimentFormGenerator.prototype.generateCommonLeaf = function(fieldname, type) {
+  // TODO: break according to field type
+  // bool
+  // integer
+  // float
+  this.html += "<div class='col-sm-10'> \
+    <input value='"+fieldname+" "+type+"' class='form-control'> \
+  </div></div>";
+}
+  //   <div class="col-sm-10">
+  //     {{input type="text" class="form-control" name="name" id="name" placeholder="Name" value=name}}
+  //   </div>
+  // </div>
+
+ExperimentFormGenerator.prototype.run = function(depth, settingsTree, info, fieldname) {
+  var fieldnamen = "";
+  // filter out unwanted stuff
+  if (typeof(settingsTree) != "function" && typeof(settingsTree) != "undefined") {
+    // console.log(depth);
+    // console.log(typeof(settingsTree));
+    // console.log(settingsTree);
+    if (typeof(settingsTree) != "object") {
+      // leaf
+      if (!info) {
+        this.generateCommonLeaf(fieldname, settingsTree);
+        // this.html += depth+" leaf "+info+" "+settingsTree+"<br>";
+      }
+      else {
+        this.html += depth+" leaf "+info+" "+settingsTree+"<br>";
+      }
+    }
+    else if (Array.isArray(settingsTree)) {
+      for(node in settingsTree) {
+        this.run(depth+1, settingsTree[node], "choice", fieldnamen);
+      }
+    }
+    else {
+      for(node in settingsTree) {
+        if (typeof(node) != "function" && typeof(node) != "undefined") {
+          if (depth === 0) {
+            this.generateFieldset(node);
+          }
+          else if (typeof(settingsTree[node]) != "object") {
+            fieldnamen = node;
+            // this.html += depth+" preleaf "+info+" "+node+"<br>";
+            this.generateLabel(node);
+          }
+          else if (Array.isArray(settingsTree[node])) {
+            this.html += depth+" node select "+node+"<br>";
+          }
+          else {
+            this.html += depth+" node "+info+" "+node+"<br>";
+          }
+          this.run(depth+1, settingsTree[node], "", fieldnamen);
+        }
+      }
+    }
+  }
+}
+
+ExperimentFormGenerator.prototype.generate = function() {
+  this.run(0, this.settings, "", "");
+  return this.html;
+}
+
+
+
+Ember.Handlebars.helper("experimentSettingsWidgets", function() {
+  var html = new ExperimentFormGenerator(experimentSettingsWidgets);
+  return new Handlebars.SafeString(html.generate());
+});

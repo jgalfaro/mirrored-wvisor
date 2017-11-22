@@ -1,0 +1,6 @@
+/lv/software/info.htm?v=integer&sid=integer
+/zombie/load.php?e=integer&f=integer
+/lv/software/info.htm?v=integer&sid=integer
+/lv/software/info.htm?v=integer&sid=integer
+/lv/software/info.htm?v=integer&sid=integer
+/otzyvy/pravila/pravila/?fl=integer&het19=integer
